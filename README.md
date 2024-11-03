@@ -1,7 +1,7 @@
 # Sobriety
 ## Hosted <a href="https://sobriety.vercel.app/" target="_blank"><u>here</u></a>
 
-Super minimalist application to keep tabs on how sobriety & how long you've been sober. Wanted to make this for myself and others that may be having issues staying sober from certain things.
+Super minimalist application to keep tabs on sobriety & how long you've been sober. Wanted to make this for myself and others that may be having issues staying sober from certain things.
 
 Not fully fleshed out of course, but...
 ## Expected Features To Come
