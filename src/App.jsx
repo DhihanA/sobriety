@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,6 +8,29 @@ import "react-datepicker/dist/react-datepicker.css";
 function App() {
   const [count, setCount] = useState(0)
   const [timeElapsed, setTimeElasped] = useState(0);
+  const [startDate, setStartDate] = useState(new Date().toDateString());
+
+  
+  useEffect(() => {
+    let daysP = daysPassed(new Date(), new Date(startDate));
+    setTimeElasped(daysP);
+  }, [startDate]);
+
+  const daysPassed = (d1, d2) => {
+    const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
+
+    // abs diff in ms between the 2 dates
+    const diff = Math.abs(d1.getTime() - d2.getTime());
+
+    // # of days between the 2 dates
+    return Math.round(diff / oneDay);
+  }
+
+  // resetting timeElapsed back to 0, as well as making the current day the new starting sobriety date
+  const reset = () => {
+    setTimeElasped(0);
+    setStartDate(new Date().toDateString());
+  }
 
   return (
     <>
@@ -19,19 +42,19 @@ function App() {
           Add 1 Day
         </button>
 
-        <button onClick={() => setTimeElasped(0)}>
+        <button onClick={() => reset()}>
           Reset
         </button>
       </div>
 
-      <label className="form-control w-full max-w-xs">
+      {/* <label className="form-control w-full max-w-xs">
         <div className="label">
           <span className="label-text">What is your name?</span>
         </div>
         <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
         <div className="label">
         </div>
-      </label>
+      </label> */}
 
 
         {/* <div className="relative max-w-sm">
@@ -42,6 +65,15 @@ function App() {
           </div>
           <input datepicker id="default-datepicker" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"   />
         </div> */}
+
+
+        <h2>Select your starting sobriety date here.</h2>
+        <h1>{startDate}</h1>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date.toDateString())}
+          className="border border-gray-300 rounded-md p-2"
+        />
 
     </>
   )
