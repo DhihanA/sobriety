@@ -23,13 +23,13 @@ function App() {
     const diff = Math.abs(d1.getTime() - d2.getTime());
 
     // # of days between the 2 dates
-    return Math.round(diff / oneDay);
+    return Math.floor(diff / oneDay);
   }
 
   // resetting timeElapsed back to 0, as well as making the current day the new starting sobriety date
   const reset = () => {
-    setTimeElasped(0);
     setStartDate(new Date().toDateString());
+    setTimeElasped(0);
   }
 
   return (
@@ -67,7 +67,7 @@ function App() {
         </div> */}
 
 
-        <h2>Select your starting sobriety date here.</h2>
+        <h2>Your starting sobriety date here:</h2>
         <h1>{startDate}</h1>
         <DatePicker
           selected={startDate}
